@@ -95,7 +95,7 @@
     "nombre": "Moira",
     "cargo": "Success Manager",
     "titulo": null,
-    "email": "moira.reyes@alfondo.cl",
+    "email": "moira.reyes@funder.cl",
     "linkedin": null,
     "foto": "https://alfondo.cl/team/moira-3.png"
   },
@@ -105,8 +105,18 @@
     "nombre": "Aylin",
     "cargo": "Consultora",
     "titulo": null,
-    "email": "aylin.jara@alfondo.cl",
+    "email": "aylin.jara@funder.cl",
     "linkedin": null,
     "foto": "https://alfondo.cl/team/aylin4.png"
+  },
+  {
+    "slug": "jose-funder",
+    "brand": "funder",
+    "nombre": "José",
+    "cargo": "Consultor",
+    "titulo": null,
+    "email": "jose.neculgual@funder.cl",
+    "linkedin": null,
+    "foto": "https://alfondo.cl/team/jose3.png"
   }
 ]
