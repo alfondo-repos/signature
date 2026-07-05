@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "nicolas-jara",
+    "nombre": "Nicolás Jara",
+    "cargo": "Socio Fundador | CEO",
+    "titulo": "Mg. en Gestión y Emprendimiento Tecnológico",
+    "email": "nicolas.jara@alfondo.cl",
+    "linkedin": "https://www.linkedin.com/in/jarascript",
+    "foto": "https://alfondo.cl/team/nico3.png"
+  },
+  {
+    "slug": "heber-arratia",
+    "nombre": "Heber Arratia",
+    "cargo": "Socio Fundador | CTO",
+    "titulo": "Ingeniero de software",
+    "email": "heber.arratia@alfondo.cl",
+    "linkedin": "https://www.linkedin.com/in/heberarratia",
+    "foto": "https://alfondo.cl/team/heber3.png"
+  },
+  {
+    "slug": "marcelo-esperguel",
+    "nombre": "Marcelo Esperguel",
+    "cargo": "Consultor | Director de Ingeniería",
+    "titulo": "Mg. en Ingeniería de software",
+    "email": "marcelo.esperguel@alfondo.cl",
+    "linkedin": "https://www.linkedin.com/in/mesperguel/",
+    "foto": "https://alfondo.cl/team/marcelo3.png"
+  },
+  {
+    "slug": "aylin-jara",
+    "nombre": "Aylin Jara",
+    "cargo": "Consultora",
+    "titulo": "Ingeniero Civil Industrial mención Informática",
+    "email": "aylin.jara@alfondo.cl",
+    "linkedin": null,
+    "foto": "https://alfondo.cl/team/aylin4.png"
+  },
+  {
+    "slug": "moira-reyes",
+    "nombre": "Moira Reyes",
+    "cargo": "Gestora de Operaciones Comerciales",
+    "titulo": null,
+    "email": "moira.reyes@alfondo.cl",
+    "linkedin": null,
+    "foto": "https://alfondo.cl/team/moira-3.png"
+  },
+  {
+    "slug": "fabiola-pena",
+    "nombre": "Fabiola Peña",
+    "cargo": "Consultora Especialista Proyectos de Agronomía",
+    "titulo": "Dra. en Agroalimentos",
+    "email": "fabiola.pena@alfondo.cl",
+    "linkedin": null,
+    "foto": "https://alfondo.cl/team/fabiola3.png"
+  },
+  {
+    "slug": "jose-neculgual",
+    "nombre": "José Neculgual",
+    "cargo": "Consultor",
+    "titulo": "Ingeniero Civil Industrial mención Bioprocesos",
+    "email": "jose.neculgual@alfondo.cl",
+    "linkedin": null,
+    "foto": "https://alfondo.cl/team/jose3.png"
+  },
+  {
+    "slug": "david-navarrete",
+    "nombre": "David Navarrete",
+    "cargo": "Consultor",
+    "titulo": "Ingeniero Civil Industrial mención Informática",
+    "email": "david.navarrete@alfondo.cl",
+    "linkedin": null,
+    "foto": "https://alfondo.cl/team/david3.png"
+  },
+  {
+    "slug": "cristian-oyarzun",
+    "nombre": "Cristian Oyarzún",
+    "cargo": "Consultor Especialista en Proyectos IoT",
+    "titulo": "Ingeniero Civil Electrónico",
+    "email": "cristian.oyarzun@alfondo.cl",
+    "linkedin": null,
+    "foto": "https://alfondo.cl/team/oyarzun.png"
+  },
+  {
+    "slug": "walter-noack",
+    "nombre": "Walter Noack",
+    "cargo": "Consultor",
+    "titulo": "Ingeniero Ambiental",
+    "email": "walter@alfondo.cl",
+    "linkedin": null,
+    "foto": null
+  }
+]

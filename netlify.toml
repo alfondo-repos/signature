@@ -1,0 +1,11 @@
+# Despliegue estático — sube esta carpeta tal cual
+# URL resultante: https://tu-sitio.netlify.app
+
+[build]
+  publish = "."
+  command = "python3 generate.py"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=300"

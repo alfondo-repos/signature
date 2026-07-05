@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firmas — Equipo Alfondo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #F7F7F5;
+      min-height: 100vh;
+      padding: 48px 24px 80px;
+      color: #3D3D3D;
+    }
+
+    .page { max-width: 900px; margin: 0 auto; }
+
+    header { margin-bottom: 40px; }
+
+    header h1 {
+      font-size: 26px;
+      font-weight: 600;
+      color: #1A1F2E;
+      letter-spacing: -0.4px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      max-width: 560px;
+    }
+
+    .meta {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #888;
+    }
+
+    .meta a { color: #D4837A; text-decoration: none; }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 4px 10px;
+      background: #EEF9F0;
+      border: 1px solid #C8E6C9;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #2E7D32;
+    }
+
+    .live-badge::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #43A047;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #E8E4DE;
+      border-radius: 6px;
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .card-info h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1A1F2E;
+      margin-bottom: 4px;
+    }
+
+    .card-info p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .card-info .email {
+      font-size: 12px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid #1A1F2E;
+      background: #1A1F2E;
+      color: #fff;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    button.secondary {
+      background: transparent;
+      color: #1A1F2E;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #999;
+      margin: 20px 0 8px;
+    }
+
+    .code-block {
+      position: relative;
+    }
+
+    .code-block textarea {
+      width: 100%;
+      height: 200px;
+      padding: 14px;
+      font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #333;
+      background: #F8F8F6;
+      border: 1px solid #E8E4DE;
+      border-radius: 4px;
+      resize: vertical;
+      tab-size: 2;
+    }
+
+    .code-block textarea:focus {
+      outline: none;
+      border-color: #D4837A;
+    }
+
+    .code-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    button:hover { opacity: 0.88; }
+
+    .signature-wrap {
+      padding-bottom: 4px;
+    }
+
+    .card-actions a { text-decoration: none; }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1A1F2E;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 13px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .note {
+      margin-top: 32px;
+      padding: 20px 24px;
+      background: #FFFBF5;
+      border: 1px solid #E8DFD0;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #6B5B4F;
+      line-height: 1.7;
+    }
+
+    .note strong { color: #4A4A4A; }
+
+    .note code {
+      background: #fff;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+
+    .instructions {
+      background: #fff;
+      border: 1px solid #E8E4DE;
+      border-radius: 6px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+    }
+
+    .instructions h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1A1F2E;
+      margin-bottom: 16px;
+    }
+
+    .instructions ol {
+      padding-left: 20px;
+      font-size: 14px;
+      line-height: 1.85;
+      color: #4A4A4A;
+    }
+
+    .instructions li { margin-bottom: 6px; }
+
+    .instructions code {
+      background: #F4F2EF;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+
+    .instructions-tip {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #F0F0F0;
+      font-size: 13px;
+      color: #888;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Firmas del equipo — Alfondo</h1>
+      <p>Encuentra tu firma, cópiala y pégala en Gmail.</p>
+      <p class="meta dev-only">Dev: edita <code>team.json</code> → <code>python3 server.py</code></p>
+      <div class="live-badge dev-only">Preview en vivo</div>
+    </header>
+
+    <div class="instructions">
+      <h2>Cómo configurar tu firma en Google Workspace</h2>
+      <ol>
+        <li>Busca tu nombre abajo.</li>
+        <li><strong>Opción A — Gmail (recomendada):</strong> haz clic en <strong>Abrir firma</strong> → en la pestaña nueva selecciona todo (<strong>Cmd+A</strong>) → copia (<strong>Cmd+C</strong>) → pega en Gmail.</li>
+        <li><strong>Opción B — Código HTML:</strong> haz clic en <strong>Copiar código</strong> del cuadro de texto, o selecciónalo manualmente.</li>
+        <li>Abre Gmail → <strong>⚙ Configuración</strong> → <strong>Ver toda la configuración</strong> → pestaña <strong>General</strong> → sección <strong>Firma</strong>.</li>
+        <li>Crea o edita tu firma y pega con <strong>Cmd+V</strong>.</li>
+        <li>Márcala como predeterminada y guarda cambios.</li>
+      </ol>
+      <p class="instructions-tip">
+        Gmail necesita el contenido <em>renderizado</em> (Opción A). El código HTML del cuadro sirve para respaldo o configuración por administrador.
+      </p>
+    </div>
+
+    <div id="team-list"></div>
+
+    <div class="note">
+      <strong>Pendiente por persona:</strong><br>
+      · Agregar URL de LinkedIn en <code>team.json</code><br>
+      · Verificar email corporativo si difiere del formato nombre.apellido@alfondo.cl
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Firma copiada</div>
+
+  <script>
+    const cacheBust = () => `?v=${Date.now()}`;
+
+    let currentVersion = null;
+    const signatureCache = {};
+
+    async function fetchFresh(url) {
+      const res = await fetch(`${url}${cacheBust()}`, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`No se pudo cargar ${url}`);
+      return res;
+    }
+
+    async function loadTeam() {
+      const team = await fetchFresh('team.json').then(r => r.json());
+      const container = document.getElementById('team-list');
+      container.innerHTML = '';
+
+      for (const member of team) {
+        const html = await fetchFresh(`team/${member.slug}.html`).then(r => r.text());
+        signatureCache[member.slug] = html.replace(/<!--[\s\S]*?-->\n?/g, '').trim();
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-header">
+            <div class="card-info">
+              <h2>${member.nombre}</h2>
+              <p>${member.cargo}${member.titulo ? ' · ' + member.titulo : ''}</p>
+              <p class="email">${member.email}</p>
+            </div>
+            <div class="card-actions">
+              <a href="view/${member.slug}.html" target="_blank" rel="noopener">
+                <button type="button" class="secondary">Abrir firma</button>
+              </a>
+            </div>
+          </div>
+          <div class="section-label">Vista previa</div>
+          <div class="signature-wrap" id="sig-${member.slug}"></div>
+          <div class="section-label">Código HTML</div>
+          <div class="code-block">
+            <textarea id="code-${member.slug}" readonly spellcheck="false"></textarea>
+            <div class="code-actions">
+              <button type="button" onclick="copyCode('${member.slug}')">Copiar código</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+        document.getElementById(`sig-${member.slug}`).innerHTML = html;
+        document.getElementById(`code-${member.slug}`).value = signatureCache[member.slug];
+      }
+    }
+
+    function copyCode(slug) {
+      const textarea = document.getElementById(`code-${slug}`);
+      textarea.focus();
+      textarea.select();
+      textarea.setSelectionRange(0, textarea.value.length);
+
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch { ok = false; }
+
+      const toast = document.getElementById('toast');
+      toast.textContent = ok ? 'Código HTML copiado' : 'Selecciona el código manualmente y usa Cmd+C';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    function showUpdateToast() {
+      const toast = document.getElementById('toast');
+      toast.textContent = 'Firmas actualizadas';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    async function checkForUpdates() {
+      try {
+        const { token } = await fetch('/__dev/version', { cache: 'no-store' }).then(r => r.json());
+        if (currentVersion === null) {
+          currentVersion = token;
+          return;
+        }
+        if (token !== currentVersion) {
+          currentVersion = token;
+          await loadTeam();
+          showUpdateToast();
+        }
+      } catch {
+        // servidor no disponible
+      }
+    }
+
+    loadTeam();
+
+    const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    if (isDev) {
+      document.querySelectorAll('.dev-only').forEach(el => el.style.display = '');
+      setInterval(checkForUpdates, 800);
+    } else {
+      document.querySelectorAll('.dev-only').forEach(el => el.style.display = 'none');
+    }
+  </script>
+</body>
+</html>

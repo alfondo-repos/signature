@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firma Alfondo — Preview</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #F7F7F5;
+      min-height: 100vh;
+      padding: 48px 24px;
+      color: #3D3D3D;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 26px;
+      font-weight: 600;
+      color: #1A1F2E;
+      letter-spacing: -0.4px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #E8E4DE;
+      border-radius: 6px;
+      padding: 40px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 3px rgba(10, 22, 40, 0.04);
+    }
+
+    .card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #D4837A;
+      margin-bottom: 24px;
+    }
+
+    .email-context {
+      background: #FAFAFA;
+      border-left: 3px solid #D4837A;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      color: #888;
+      line-height: 1.7;
+    }
+
+    .email-context strong {
+      color: #4A4A4A;
+      font-weight: 500;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 13px;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid #1A1F2E;
+      background: #1A1F2E;
+      color: #fff;
+      transition: opacity 0.15s;
+    }
+
+    button:hover { opacity: 0.88; }
+
+    button.secondary {
+      background: transparent;
+      color: #1A1F2E;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1A1F2E;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 13px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .instructions {
+      background: #fff;
+      border: 1px solid #E8E4DE;
+      border-radius: 6px;
+      padding: 32px 40px;
+    }
+
+    .instructions h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1A1F2E;
+      margin-bottom: 20px;
+    }
+
+    .instructions ol {
+      padding-left: 20px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #4A4A4A;
+    }
+
+    .instructions li { margin-bottom: 8px; }
+
+    .instructions code {
+      background: #F4F2EF;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+
+    .note {
+      margin-top: 20px;
+      padding: 16px;
+      background: #FFFBF5;
+      border: 1px solid #E8DFD0;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #6B5B4F;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Firma de correo — Alfondo</h1>
+      <p>Vista previa con datos de ejemplo. Alfondo ayuda a crear, escalar y financiar proyectos — postulación a fondos, innovación y desarrollo de software.</p>
+    </header>
+
+    <div class="card">
+      <div class="card-label">Vista previa en contexto de correo</div>
+
+      <div class="email-context">
+        <strong>De:</strong> Valentina Morales &lt;valentina.morales@alfondo.cl&gt;<br>
+        <strong>Para:</strong> cliente@empresa.com<br>
+        <strong>Asunto:</strong> Seguimiento postulación Semilla Expande<br><br>
+        Estimado/a,<br><br>
+        Adjunto el feedback sobre la formulación del proyecto según lo conversado. Quedo atenta a tus comentarios para avanzar con la postulación.<br><br>
+        Saludos cordiales,
+      </div>
+
+      <div id="signature-preview"></div>
+    </div>
+
+    <div class="actions">
+      <button onclick="copySignature()">Copiar firma al portapapeles</button>
+      <button class="secondary" onclick="window.open('signature.html', '_blank')">Ver HTML fuente</button>
+    </div>
+
+    <div class="instructions" style="margin-top: 32px;">
+      <h2>Importar en Google Workspace</h2>
+      <ol>
+        <li>Abre Gmail → <code>Configuración</code> (⚙) → <code>Ver toda la configuración</code></li>
+        <li>En la pestaña <code>General</code>, baja hasta <code>Firma</code></li>
+        <li>Crea una firma nueva y haz clic en el ícono <code>&lt;&gt;</code> (Editar HTML) si está disponible, o pega directamente con <strong>Cmd+V</strong></li>
+        <li>Si Gmail no conserva el formato, abre <code>signature.html</code> en el navegador, selecciona la firma visualmente y cópiala</li>
+        <li>Para administradores: ve a <code>Admin Console → Aplicaciones → Google Workspace → Gmail → Configuración de usuario</code> y configura plantillas organizacionales</li>
+        <li>Reemplaza la foto de Unsplash por una imagen alojada en Google Drive (compartida como pública) o en el servidor de alfondo.cl</li>
+      </ol>
+
+      <div class="note">
+        <strong>Datos de ejemplo actuales:</strong> Valentina Morales · Ing. Comercial · Consultora en Financiamiento · alfondo.cl · LinkedIn<br><br>
+        Reemplaza la URL de LinkedIn y la foto con los datos reales de cada colaborador.
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Firma copiada al portapapeles</div>
+
+  <script>
+    async function fetchFresh(url) {
+      const res = await fetch(`${url}?v=${Date.now()}`, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`No se pudo cargar ${url}`);
+      return res;
+    }
+
+    fetchFresh('signature.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('signature-preview').innerHTML = html;
+      });
+
+    async function copySignature() {
+      const html = await fetchFresh('signature.html').then(r => r.text());
+      const preview = document.getElementById('signature-preview');
+
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            'text/html': new Blob([html], { type: 'text/html' }),
+            'text/plain': new Blob([preview.innerText], { type: 'text/plain' })
+          })
+        ]);
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(preview);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand('copy');
+        sel.removeAllRanges();
+      }
+
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+  </script>
+</body>
+</html>
