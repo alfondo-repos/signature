@@ -123,6 +123,25 @@
       padding-top: 24px;
     }
 
+    .brand-section {
+      margin-bottom: 40px;
+    }
+
+    .brand-section h2 {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E8E4DE;
+    }
+
+    .brand-section.funder h2 {
+      color: #046AFF;
+    }
+
     .toast {
       position: fixed;
       bottom: 24px;
@@ -179,8 +198,8 @@
 <body>
   <div class="page">
     <header>
-      <h1>Firmas del equipo — Alfondo</h1>
-      <p>Encuentra tu firma, cópiala y pégala en Gmail.</p>
+      <h1>Firmas del equipo</h1>
+      <p>Alfondo y Funder — copia tu firma y pégala en Gmail.</p>
       <p class="meta dev-only">Dev: edita <code>team.json</code> → <code>python3 server.py</code></p>
       <div class="live-badge dev-only">Preview en vivo</div>
     </header>
@@ -217,24 +236,41 @@
       const container = document.getElementById('team-list');
       container.innerHTML = '';
 
-      for (const member of team) {
-        const html = await fetchFresh(`team/${member.slug}.html`).then(r => r.text());
+      const groups = [
+        { key: 'alfondo', label: 'Alfondo', members: team.filter(m => (m.brand || 'alfondo') === 'alfondo') },
+        { key: 'funder', label: 'Funder', members: team.filter(m => m.brand === 'funder') },
+      ];
 
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <div class="card-header">
-            <div class="card-info">
-              <h2>${member.nombre}</h2>
-              <p>${member.cargo}${member.titulo ? ' · ' + member.titulo : ''}</p>
-              <p class="email">${member.email}</p>
+      for (const group of groups) {
+        if (!group.members.length) continue;
+
+        const section = document.createElement('div');
+        section.className = `brand-section ${group.key}`;
+        section.innerHTML = `<h2>${group.label}</h2>`;
+        container.appendChild(section);
+
+        for (const member of group.members) {
+          const html = await fetchFresh(`team/${member.slug}.html`).then(r => r.text());
+          const subtitle = member.brand === 'funder'
+            ? member.cargo
+            : `${member.cargo}${member.titulo ? ' · ' + member.titulo : ''}`;
+
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <div class="card-header">
+              <div class="card-info">
+                <h2>${member.nombre}</h2>
+                <p>${subtitle}</p>
+                <p class="email">${member.email}</p>
+              </div>
+              <button type="button" onclick="copySignature('${member.slug}', this)">Copiar firma</button>
             </div>
-            <button type="button" onclick="copySignature('${member.slug}', this)">Copiar firma</button>
-          </div>
-          <div class="signature-wrap" id="sig-${member.slug}"></div>
-        `;
-        container.appendChild(card);
-        document.getElementById(`sig-${member.slug}`).innerHTML = html;
+            <div class="signature-wrap" id="sig-${member.slug}"></div>
+          `;
+          section.appendChild(card);
+          document.getElementById(`sig-${member.slug}`).innerHTML = html;
+        }
       }
     }
 

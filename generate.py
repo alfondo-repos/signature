@@ -8,6 +8,31 @@ TEAM_FILE = ROOT / "team.json"
 OUT_DIR = ROOT / "team"
 VIEW_DIR = ROOT / "view"
 
+BRANDS = {
+    "alfondo": {
+        "label": "Alfondo",
+        "accent": "#D4837A",
+        "site_url": "https://alfondo.cl",
+        "site_label": "alfondo.cl",
+        "logo_url": "https://alfondo.cl/logo-negro-sinfondo.png",
+        "logo_width": 100,
+        "logo_alt": "alfondo",
+    },
+    "funder": {
+        "label": "Funder",
+        "accent": "#046AFF",
+        "site_url": "https://www.funder.cl",
+        "site_label": "funder.cl",
+        "logo_url": "https://alfondo-repos.github.io/signature/assets/funder-logo.png",
+        "logo_width": 90,
+        "logo_alt": "funder",
+    },
+}
+
+
+def brand_for(member: dict) -> dict:
+    return BRANDS[member.get("brand", "alfondo")]
+
 
 def photo_url(member: dict) -> str:
     if member.get("foto"):
@@ -18,6 +43,13 @@ def photo_url(member: dict) -> str:
 
 def cargo_row(member: dict) -> str:
     cargo = member["cargo"]
+    brand_key = member.get("brand", "alfondo")
+
+    if brand_key == "funder":
+        return f"""            <span style="font-size: 13px; color: #1A1F2E; font-weight: 500;">
+              {cargo}
+            </span>"""
+
     titulo = member.get("titulo")
     if titulo:
         return f"""            <span style="font-size: 13px; color: #1A1F2E; font-weight: 500;">
@@ -32,14 +64,18 @@ def cargo_row(member: dict) -> str:
             </span>"""
 
 
-def links_row(member: dict) -> str:
+def links_row(member: dict, brand: dict) -> str:
     linkedin = member.get("linkedin")
+    accent = brand["accent"]
+    site_url = brand["site_url"]
+    site_label = brand["site_label"]
+
     if linkedin:
         return f"""            <table cellpadding="0" cellspacing="0" border="0">
               <tr>
                 <td style="vertical-align: middle; padding: 0; line-height: 13px;">
-                  <a href="https://alfondo.cl" style="color: #D4837A; text-decoration: none; font-size: 13px; line-height: 13px;">
-                    alfondo.cl
+                  <a href="{site_url}" style="color: {accent}; text-decoration: none; font-size: 13px; line-height: 13px;">
+                    {site_label}
                   </a>
                 </td>
                 <td style="vertical-align: middle; padding: 0 8px; line-height: 13px; color: #DDDDDD; font-size: 12px;">
@@ -52,13 +88,15 @@ def links_row(member: dict) -> str:
                 </td>
               </tr>
             </table>"""
-    return """            <a href="https://alfondo.cl" style="color: #D4837A; text-decoration: none; font-size: 13px; line-height: 13px;">
-              alfondo.cl
+    return f"""            <a href="{site_url}" style="color: {accent}; text-decoration: none; font-size: 13px; line-height: 13px;">
+              {site_label}
             </a>"""
 
 
 def build_signature(member: dict) -> str:
-    return f"""<!-- Firma Alfondo — {member["nombre"]} -->
+    brand = brand_for(member)
+    brand_label = brand["label"]
+    return f"""<!-- Firma {brand_label} — {member["nombre"]} -->
 <table cellpadding="0" cellspacing="0" border="0" style="font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.5; color: #3D3D3D; max-width: 480px;">
   <tr>
     <td style="padding: 0 18px 0 0; vertical-align: top;">
@@ -70,7 +108,7 @@ def build_signature(member: dict) -> str:
         style="display: block; border-radius: 50%; border: 0; object-fit: cover;"
       />
     </td>
-    <td style="vertical-align: top; border-left: 2px solid #D4837A; padding: 0 0 0 18px;">
+    <td style="vertical-align: top; border-left: 2px solid {brand["accent"]}; padding: 0 0 0 18px;">
       <table cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td style="padding: 0 0 1px 0;">
@@ -86,16 +124,16 @@ def build_signature(member: dict) -> str:
         </tr>
         <tr>
           <td style="padding: 0 0 14px 0;">
-{links_row(member)}
+{links_row(member, brand)}
           </td>
         </tr>
         <tr>
           <td style="padding: 0;">
-            <a href="https://alfondo.cl" style="text-decoration: none;">
+            <a href="{brand["site_url"]}" style="text-decoration: none;">
               <img
-                src="https://alfondo.cl/logo-negro-sinfondo.png"
-                alt="alfondo"
-                width="100"
+                src="{brand["logo_url"]}"
+                alt="{brand["logo_alt"]}"
+                width="{brand["logo_width"]}"
                 height="auto"
                 style="display: block; border: 0;"
               />

@@ -88,5 +88,25 @@
     "email": "walter@alfondo.cl",
     "linkedin": null,
     "foto": null
+  },
+  {
+    "slug": "moira-funder",
+    "brand": "funder",
+    "nombre": "Moira",
+    "cargo": "Success Manager",
+    "titulo": null,
+    "email": "moira.reyes@alfondo.cl",
+    "linkedin": null,
+    "foto": "https://alfondo.cl/team/moira-3.png"
+  },
+  {
+    "slug": "aylin-funder",
+    "brand": "funder",
+    "nombre": "Aylin",
+    "cargo": "Consultora",
+    "titulo": null,
+    "email": "aylin.jara@alfondo.cl",
+    "linkedin": null,
+    "foto": "https://alfondo.cl/team/aylin4.png"
   }
 ]
